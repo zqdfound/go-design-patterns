@@ -14,9 +14,11 @@ package main
 // }
 
 import (
+	sa "design-parttens/d1/action"
 	si "design-parttens/d1/single"
 	st "design-parttens/d1/structure"
 	"net/http"
+	"time"
 
 	"fmt"
 )
@@ -52,7 +54,7 @@ func main2() {
 }
 
 // decorator
-func main() {
+func main3() {
 	// 创建基础处理器
 	h := &st.BasicHandler{}
 
@@ -70,4 +72,24 @@ func main() {
 
 	fmt.Println("服务器启动在 :8089")
 	http.ListenAndServe(":8089", nil)
+}
+
+// template
+func main() {
+	s1 := sa.TemplateWithLog("setUp", func() {
+		fmt.Println("设置环境")
+		time.Sleep(500 * time.Millisecond)
+	})
+	s2 := sa.TemplateWithLog("process", func() {
+		fmt.Println("执行处理")
+		time.Sleep(500 * time.Millisecond)
+	})
+
+	s3 := sa.TemplateWithLog("cleanUp", func() {
+		fmt.Println("清理资源")
+		time.Sleep(500 * time.Millisecond)
+	})
+
+	sa.Template(s1, s2, s3)
+
 }
