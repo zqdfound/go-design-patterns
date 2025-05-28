@@ -15,14 +15,24 @@ package main
 
 import (
 	si "design-parttens/d1/single"
+
 	"fmt"
 )
 
 func main() {
-	// s.DoSomething()
+	// for i := 0; i < 10; i++ {
+	// 	s := si.GetSingeltoneDelay()
+	// 	fmt.Printf("%p\n", s)
+	// }
+
+	// for i := 0; i < 10; i++ {
+	// 	s := si.GetSingeltoneLock()
+	// 	fmt.Printf("%p\n", s)
+	// }
+
 	for i := 0; i < 10; i++ {
-		s := si.GetSingeltoneDelay()
-		fmt.Println(&s)
+		s := si.GetSingeltoneOnce()
+		fmt.Printf("%p\n", s)
 	}
 
 }
