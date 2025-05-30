@@ -75,7 +75,7 @@ func main3() {
 }
 
 // template
-func main() {
+func main4() {
 	s1 := sa.TemplateWithLog("setUp", func() {
 		fmt.Println("设置环境")
 		time.Sleep(500 * time.Millisecond)
@@ -92,4 +92,19 @@ func main() {
 
 	sa.Template(s1, s2, s3)
 
+}
+
+// strategy
+func main() {
+	context := &sa.PaymentContext{}
+
+	// 使用工厂创建策略
+	creditCardParams := map[string]string{
+		"name":    "李四",
+		"cardNum": "6543210987654321",
+		"cvv":     "456",
+		"expiry":  "06/24",
+	}
+	context.SetStrategy(sa.PaymentStrategyFactory(sa.CreditCard, creditCardParams))
+	fmt.Println(context.ExecutePayment(300.25))
 }
