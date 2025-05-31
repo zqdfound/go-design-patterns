@@ -95,7 +95,7 @@ func main4() {
 }
 
 // strategy
-func main() {
+func main5() {
 	context := &sa.PaymentContext{}
 
 	// 使用工厂创建策略
@@ -107,4 +107,23 @@ func main() {
 	}
 	context.SetStrategy(sa.PaymentStrategyFactory(sa.CreditCard, creditCardParams))
 	fmt.Println(context.ExecutePayment(300.25))
+}
+
+// observer
+func main() {
+	appStock := sa.NewStock("AppStock")
+
+	investor1 := sa.NewInvestor(1, 100.0)
+	investor2 := sa.NewInvestor(2, 200.0)
+	investor3 := sa.NewInvestor(3, 300.0)
+
+	appStock.RegisterObserver(investor1)
+	appStock.RegisterObserver(investor2)
+	appStock.RegisterObserver(investor3)
+
+	// appStock.UpdatePrice(100.0)
+	// appStock.UpdatePrice(200.0)
+	// appStock.UpdatePrice(300.0)
+	appStock.UpdatePrice(400.0)
+
 }
